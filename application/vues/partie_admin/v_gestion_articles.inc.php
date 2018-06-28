@@ -4,7 +4,7 @@
             <?php if (isset($_COOKIE['user']) && JWT::decode($_COOKIE['user'], VariablesGlobales::KEY)->isAdmin == true) { ?>
                 <div class="row">
                     <div class="col-lg-12">
-                        <a class="btn btn-primary" href="admin/ecrireArticle" id="btn-ajout-news" >Ecrire un article</a>
+                        <a class="btn btn-primary" href="admin/gestion_article/creation_article" id="btn-ajout-news" >Ecrire un article</a>
                     </div>
                 </div>        
 
@@ -26,10 +26,10 @@
                             </div>
                             <div class="row">
                                 <aside class="col-lg-12" style="margin-top: 25px;">
-                                    <form action="admin/supprimerArticle" method="post">
+                                    <form action="admin/gestion_article/supprimer_article" method="post">
                                         <input name="btnSuppr<?php echo $i ?>" class="btn btn-danger" type="submit" value="Supprimer l'article">
                                     </form>
-                                    <form action="admin/editerArticle/<?php echo $unarticle->idarticle ?>" method="post">
+                                    <form action="admin/gestion_article/modifier_article/<?php echo $unarticle->idarticle ?>" method="post">
                                         <input name="btnEdit" class="btn btn-danger" type="submit" value="Editer l'article">
                                     </form>
                                 </aside>

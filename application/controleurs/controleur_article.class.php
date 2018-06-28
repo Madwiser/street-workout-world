@@ -24,9 +24,9 @@ class ControleurArticle {
 
     }
 
-    public function afficherRecapArticles() {
+    public function gestionArticle() {
         VariablesGlobales::$lesarticles = GestionArticle::getLesarticles();
-        require chemins::VUES_ADMIN . "v_recap_articles.inc.php";
+        require chemins::VUES_ADMIN . "v_gestion_articles.inc.php";
     }
 
     public function ajouterArticle() {
@@ -37,7 +37,7 @@ class ControleurArticle {
         }
     }
 
-    public function ecrireArticle() {
+    public function creationArticle() {
        require_once chemins::CONTROLEURS . 'controleur_admin.class.php';
         $ControleurAdmin = new ControleurAdmin();
         if ($ControleurAdmin->isAdmin()) {
@@ -50,14 +50,14 @@ class ControleurArticle {
     
     }
     
-    public function updatearticle(){
+    public function updateArticle(){
          if (isset($_POST['titre']) && !empty($_POST['titre']) && isset($_POST['contenu']) && !empty($_POST['contenu']) && isset($_POST['resume']) && !empty($_POST['resume']) && isset($_POST['miniature']) && !empty($_POST['miniature'])) {
              Gestionarticle::modifierarticle(htmlspecialchars($_POST['id']),htmlspecialchars($_POST['titre']),date("Y-m-d"),htmlspecialchars($_POST['contenu']),htmlspecialchars($_POST['resume']),htmlspecialchars($_POST['miniature']),$_POST['categorie'],$_POST['idcreateur']);
             self::afficherRecapArticles();
         }
     }
     
-     public function editerarticle(){
+     public function modifierArticle(){
          require_once chemins::CONTROLEURS . 'controleur_admin.class.php';
         $ControleurAdmin = new ControleurAdmin();
         if ($ControleurAdmin->isAdmin()) {
@@ -75,7 +75,7 @@ class ControleurArticle {
         }
     }
 
-    public function supprArticle() {
+    public function supprimerArticle() {
         $i = 1;
         VariablesGlobales::$lesarticles = GestionArticle::getLesarticles();
 

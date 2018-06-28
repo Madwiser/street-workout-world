@@ -24,10 +24,25 @@ var_dump($elements);
 if( empty($elements[1]) || $elements[1] == 'index.php' || $elements[1] == 'home') {                       // No path elements means home
     $controleur = 'accueil';
     $action = 'afficherarticleAccueil';
-} else{ switch($elements[1]){            // Pop off first item and switch
+    var_dump("WTF");
+} else{ switch($elements[1]){            
 case 'admin':
-    $controleur = $elements[0];
-    $action = $elements[1];
+    
+    if( empty($elements[2])){
+       $controleur = 'admin'; 
+       $action = 'afficherIndex';
+    }
+    else{
+        $controleur = explode('_', $elements[2])[1];
+        if(empty($elements[3])){
+            $action = 'gestion'.ucfirst($controleur );
+        }
+        else{
+            $actionElements = explode('_', $elements[3]);
+            $action = $actionElements[0]. ucfirst($actionElements[1]);
+        }
+    }
+  
     break;
         
 case '':
@@ -36,13 +51,15 @@ case '':
     break;
 
 default :
-     header('HTTP/1.1 404 Not Found');
+    $controleur = 'accueil';
+    $action = 'afficherarticleAccueil';
      break;
 }
 }
 
 require_once chemins::VUES_PERMANENTES . 'v_entete.inc.php';
-
+var_dump($controleur);
+var_dump($action);
 //$controleur =           !isset($_REQUEST['controleur']) ? 'accueil' : $_REQUEST['controleur'];
 $fichier_controleur =   'controleur_'.$controleur.'.class.php';
 $classe_controleur =    'Controleur'.$controleur;

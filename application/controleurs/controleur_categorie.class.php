@@ -7,7 +7,7 @@ class Controleurcategorie {
         require chemins::VUES_ADMIN . "v_categories.inc.php";
     }
     
-    public function editercategorie(){
+    public function modifierCategorie(){
          require_once chemins::CONTROLEURS . 'controleur_admin.class.php';
         $ControleurAdmin = new ControleurAdmin();
         if ($ControleurAdmin->isAdmin()) {
@@ -26,7 +26,7 @@ class Controleurcategorie {
         }
     }
     
-    public function updatecategorie(){
+    public function updateCategorie(){
          if (isset($_POST['libelle']) && !empty($_POST['libelle'])) {
        
             Gestioncategoriearticle::modifiercategoriearticle(htmlspecialchars($_POST['id']),htmlspecialchars($_POST['libelle']));
@@ -34,7 +34,7 @@ class Controleurcategorie {
         }
     }
 
-    public function nouvellecategorie() {
+    public function creationCategorie() {
         require_once chemins::CONTROLEURS . 'controleur_admin.class.php';
         $ControleurAdmin = new ControleurAdmin();
         if ($ControleurAdmin->isAdmin()) {
@@ -44,14 +44,14 @@ class Controleurcategorie {
         }
     }
 
-    public function ajoutercategorie() {
+    public function ajouterCategorie() {
         if (isset($_POST['libelle'])) {
             Gestioncategoriearticle::ajoutercategoriearticle(htmlspecialchars($_POST['libelle']));
             self::afficherCategories();
         }
     }
 
-    public function supprimercategorie() {
+    public function supprimerCategorie() {
         $i = 1;
         VariablesGlobales::$lescategories = Gestioncategoriearticle::getLescategoriearticle();
 
