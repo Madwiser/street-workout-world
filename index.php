@@ -61,6 +61,16 @@ if (empty($elements[1]) || $elements[1] == 'index.php' || $elements[1] == 'home'
             $controleur = "utilisateur";
             $action = "inscription";
             break;
+        
+        case 'articles':
+            $controleur = "article";
+            if (empty($elements[2])) {
+             $action = 'afficherArticles';
+            }
+            else{
+                
+            }
+            break;
 
         default :
             $controleur = 'accueil';

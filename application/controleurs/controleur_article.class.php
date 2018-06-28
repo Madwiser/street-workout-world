@@ -18,13 +18,24 @@ class ControleurArticle {
         
     }
 
-    public function afficherLesArticles() {
-        //VariablesGlobales::$lesProduits = gestion_boutique::getLesProduitsBycategorie($categorie);
-        //require_once chemins::VUES . 'v_produit.inc.php' ;
+    public function afficherArticles() {
+ 
         VariablesGlobales::$lesarticles = GestionArticle::getLesarticles();
-        require_once chemins::VUES . 'v_accueil.inc.php';
+        require_once chemins::VUES . 'v_articles.inc.php';
+    }
+    
+     public function afficherArticlesCategorie() {
+   
+        VariablesGlobales::$lesarticles = GestionArticle::getLesarticlesBycategorie($idcategorie);
+        require_once chemins::VUES . 'v_articles.inc.php';
     }
 
+     public function afficherArticle() {
+     
+        VariablesGlobales::$unarticle = GestionArticle::getarticleByID($idarticle);
+        require_once chemins::VUES . 'v_article.inc.php';
+    }
+    
     public function gestionArticle() {
         VariablesGlobales::$lesarticles = GestionArticle::getLesarticles();
         require chemins::VUES_ADMIN . "v_gestion_articles.inc.php";
