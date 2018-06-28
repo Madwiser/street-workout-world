@@ -66,6 +66,8 @@ class ControleurArticle {
                 if (!empty(VariablesGlobales::$unarticle)) {
                     VariablesGlobales::$lescategories = Gestioncategoriearticle::getLescategoriearticle();
                     require_once chemins::VUES_ADMIN . "v_edition_article.inc.php";
+                }else{
+                die("aucun article ne correspond...");
                 }
             }
         } else {

@@ -12,10 +12,14 @@ class Controleurcategorie {
         $ControleurAdmin = new ControleurAdmin();
         if ($ControleurAdmin->isAdmin()) {
             if (!empty(VariablesGlobales::$edit)) {
+                
                 $idCategorie = htmlspecialchars(VariablesGlobales::$edit);
                 VariablesGlobales::$lacategorie = Gestioncategoriearticle::getLacategoriearticleById($idCategorie);
                 if (!empty(VariablesGlobales::$lacategorie)) {
                     require_once chemins::VUES_ADMIN . "v_edition_categorie.inc.php";
+                }
+                else {
+            die("aucune categorie ne correspond...");
                 }
             }
         } else {
