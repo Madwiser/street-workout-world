@@ -1,4 +1,5 @@
 <?php
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,17 +12,17 @@
  * @author Luangpraseuth Alexis
  */
 class ControleurArticle {
-    //put your code here
-    public function __construct(){
 
+    //put your code here
+    public function __construct() {
+        
     }
 
-    public function afficherLesArticles(){
+    public function afficherLesArticles() {
         //VariablesGlobales::$lesProduits = gestion_boutique::getLesProduitsBycategorie($categorie);
         //require_once chemins::VUES . 'v_produit.inc.php' ;
         VariablesGlobales::$lesarticles = GestionArticle::getLesarticles();
         require_once chemins::VUES . 'v_accueil.inc.php';
-
     }
 
     public function gestionArticle() {
@@ -30,45 +31,42 @@ class ControleurArticle {
     }
 
     public function ajouterArticle() {
-          if (isset($_POST['titre']) && !empty($_POST['titre']) && isset($_POST['contenu']) && !empty($_POST['contenu']) && isset($_POST['resume']) && !empty($_POST['resume']) && isset($_POST['miniature']) && !empty($_POST['miniature'])) {
+        if (isset($_POST['titre']) && !empty($_POST['titre']) && isset($_POST['contenu']) && !empty($_POST['contenu']) && isset($_POST['resume']) && !empty($_POST['resume']) && isset($_POST['miniature']) && !empty($_POST['miniature'])) {
 
-            Gestionarticle::ajouterarticle(htmlspecialchars($_POST['titre']),date("Y-m-d"),htmlspecialchars($_POST['contenu']),htmlspecialchars($_POST['resume']),htmlspecialchars($_POST['miniature']),$_POST['categorie'],$_POST['idcreateur']);
+            Gestionarticle::ajouterarticle(htmlspecialchars($_POST['titre']), date("Y-m-d"), htmlspecialchars($_POST['contenu']), htmlspecialchars($_POST['resume']), htmlspecialchars($_POST['miniature']), $_POST['categorie'], $_POST['idcreateur']);
             self::afficherRecapArticles();
         }
     }
 
     public function creationArticle() {
-       require_once chemins::CONTROLEURS . 'controleur_admin.class.php';
+        require_once chemins::CONTROLEURS . 'controleur_admin.class.php';
         $ControleurAdmin = new ControleurAdmin();
         if ($ControleurAdmin->isAdmin()) {
-                VariablesGlobales::$lescategories = Gestioncategoriearticle::getLescategoriearticle();
-                 require_once chemins::VUES_ADMIN . "v_creationArticle.inc.php";
-            }
-            else{
-                require_once chemins::VUES_ADMIN . 'v_acces_interdit.inc.php';
-            }
-    
+            VariablesGlobales::$lescategories = Gestioncategoriearticle::getLescategoriearticle();
+            require_once chemins::VUES_ADMIN . "v_creationArticle.inc.php";
+        } else {
+            require_once chemins::VUES_ADMIN . 'v_acces_interdit.inc.php';
+        }
     }
-    
-    public function updateArticle(){
-         if (isset($_POST['titre']) && !empty($_POST['titre']) && isset($_POST['contenu']) && !empty($_POST['contenu']) && isset($_POST['resume']) && !empty($_POST['resume']) && isset($_POST['miniature']) && !empty($_POST['miniature'])) {
-             Gestionarticle::modifierarticle(htmlspecialchars($_POST['id']),htmlspecialchars($_POST['titre']),date("Y-m-d"),htmlspecialchars($_POST['contenu']),htmlspecialchars($_POST['resume']),htmlspecialchars($_POST['miniature']),$_POST['categorie'],$_POST['idcreateur']);
+
+    public function updateArticle() {
+        if (isset($_POST['titre']) && !empty($_POST['titre']) && isset($_POST['contenu']) && !empty($_POST['contenu']) && isset($_POST['resume']) && !empty($_POST['resume']) && isset($_POST['miniature']) && !empty($_POST['miniature'])) {
+            Gestionarticle::modifierarticle(htmlspecialchars($_POST['id']), htmlspecialchars($_POST['titre']), date("Y-m-d"), htmlspecialchars($_POST['contenu']), htmlspecialchars($_POST['resume']), htmlspecialchars($_POST['miniature']), $_POST['categorie'], $_POST['idcreateur']);
             self::afficherRecapArticles();
         }
     }
-    
-     public function modifierArticle(){
-         require_once chemins::CONTROLEURS . 'controleur_admin.class.php';
+
+    public function modifierArticle() {
+        require_once chemins::CONTROLEURS . 'controleur_admin.class.php';
         $ControleurAdmin = new ControleurAdmin();
         if ($ControleurAdmin->isAdmin()) {
-            if(!empty(VariablesGlobales::$edit)){
+            if (!empty(VariablesGlobales::$edit)) {
                 $idArticle = htmlspecialchars(VariablesGlobales::$edit);
                 VariablesGlobales::$unarticle = Gestionarticle::getarticleByID($idArticle);
-                VariablesGlobales::$lescategories = Gestioncategoriearticle::getLescategoriearticle();
-                 require_once chemins::VUES_ADMIN . "v_edition_article.inc.php";
-            }
-            else{
-                require_once chemins::VUES_ADMIN . 'v_acces_interdit.inc.php';
+                if (!empty(VariablesGlobales::$unarticle)) {
+                    VariablesGlobales::$lescategories = Gestioncategoriearticle::getLescategoriearticle();
+                    require_once chemins::VUES_ADMIN . "v_edition_article.inc.php";
+                }
             }
         } else {
             require_once chemins::VUES_ADMIN . 'v_acces_interdit.inc.php';
@@ -82,14 +80,12 @@ class ControleurArticle {
 
         foreach (VariablesGlobales::$lesarticles as $unArticle) {
 
-            if(isset($_POST['btnSuppr' . $i])){
+            if (isset($_POST['btnSuppr' . $i])) {
                 GestionArticle::deleteArticle($unArticle->idarticle);
-
             }
-            $i = $i +1;
+            $i = $i + 1;
         }
         self::afficherRecapArticles();
-
     }
 
 }
