@@ -2,9 +2,9 @@
 
 class Controleurcategorie {
 
-    public function afficherCategories() {
+    public function gestionCategorie() {
         VariablesGlobales::$lescategories = Gestioncategoriearticle::getLescategoriearticle();
-        require chemins::VUES_ADMIN . "v_categories.inc.php";
+        require chemins::VUES_ADMIN . "v_gestion_categories.inc.php";
     }
     
     public function modifierCategorie(){
@@ -12,8 +12,8 @@ class Controleurcategorie {
         $ControleurAdmin = new ControleurAdmin();
         if ($ControleurAdmin->isAdmin()) {
             //var_dump($_REQUEST['edit']);
-            if(isset($_REQUEST['edit']) && !empty($_REQUEST['edit'])){
-                $idCategorie = htmlspecialchars($_REQUEST['edit']);
+            if(!empty(VariablesGlobales::$edit)){
+                $idCategorie = htmlspecialchars(VariablesGlobales::$edit);
                 VariablesGlobales::$lacategorie = Gestioncategoriearticle::getLacategoriearticleById($idCategorie);
                 //var_dump(VariablesGlobales::$lacategorie);
                  require_once chemins::VUES_ADMIN . "v_edition_categorie.inc.php";

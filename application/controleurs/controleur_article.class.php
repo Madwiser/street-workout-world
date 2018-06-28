@@ -61,8 +61,8 @@ class ControleurArticle {
          require_once chemins::CONTROLEURS . 'controleur_admin.class.php';
         $ControleurAdmin = new ControleurAdmin();
         if ($ControleurAdmin->isAdmin()) {
-            if(isset($_REQUEST['edit']) && !empty($_REQUEST['edit'])){
-                $idArticle = htmlspecialchars($_REQUEST['edit']);
+            if(!empty(VariablesGlobales::$edit)){
+                $idArticle = htmlspecialchars(VariablesGlobales::$edit);
                 VariablesGlobales::$unarticle = Gestionarticle::getarticleByID($idArticle);
                 VariablesGlobales::$lescategories = Gestioncategoriearticle::getLescategoriearticle();
                  require_once chemins::VUES_ADMIN . "v_edition_article.inc.php";

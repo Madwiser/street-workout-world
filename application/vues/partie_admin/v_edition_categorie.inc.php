@@ -3,7 +3,7 @@
         <div class="col-lg-12">
             <form id='form-crea-article' class="well"  action='admin/editionCategorie' method='post' >     
                      <span class="form-group">
-                    <label for="id"  > ID  : </label>
+                    <label for="id"  > </label>
                     <input type="hidden" name='id' value="<?php echo VariablesGlobales::$lacategorie->idcategorie ?>" class="form-control"> 
                 </span>
                 

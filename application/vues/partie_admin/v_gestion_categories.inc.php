@@ -4,7 +4,7 @@
             <?php if (isset($_COOKIE['user']) && JWT::decode($_COOKIE['user'], VariablesGlobales::KEY)->isAdmin == true) { ?>
                 <div class="row">
                     <div class="col-lg-12">
-                        <a class="btn btn-primary" href="admin/gestionCategories/creationCategorie" id="btn-ajout-news" >Ajouter une catégorie</a>
+                        <a class="btn btn-primary" href="admin/gestion_categorie/creation_categorie" id="btn-ajout-news" >Ajouter une catégorie</a>
                     </div>
                 </div>        
 
@@ -17,10 +17,10 @@
                         <div class="col-lg-2">
                                 <div class="row">
                                     <aside class="col-lg-12" style="margin-top: 25px;">
-                                        <form action="admin/gestionCategories/supprimerCategorie" method="post">
+                                        <form action="admin/gestion_categorie/supprimer_categorie" method="post">
                                             <input name="btnSuppr<?php echo $i ?>" class="btn btn-danger" type="submit" value="Supprimer la catégorie">
                                         </form>
-                                        <form action="admin/gestionCategories/creationCategorie/<?php echo $unecategorie->idcategorie ?>" method="post">
+                                        <form action="admin/gestion_categorie/modifier_categorie/<?php echo $unecategorie->idcategorie ?>" method="post">
                                             <input name="btnEdit" class="btn btn-danger" type="submit" value="Editer la catégorie">
                                         </form>
                                     </aside>

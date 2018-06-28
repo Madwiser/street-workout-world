@@ -19,6 +19,7 @@ class VariablesGlobales {
     public static $lesmuscles;
     public static $lescategories;
     public static $lacategorie;
+    public static $edit;
     const KEY = 'secret JWT key';
 
     //put your code here

@@ -1,12 +1,14 @@
 <?php
-    ob_start(); // Initiate the output buffer
+ob_start(); // Initiate the output buffer
 ?>
 <!DOCTYPE html>
 <html style="height:100%;" >
     <head>
         <meta charset="utf-8" />
+        <base href="/street-workout-world/">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="<?php echo chemins::BOOTSTRAP ?>css/bootstrap.min.css">
+        <!--<link rel="stylesheet" href="<?php echo chemins::BOOTSTRAP ?>css/bootstrap.min.css">-->
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo chemins::STYLES . 'style.css'; ?>" />
         <link href="<?php echo chemins::STYLES . 'styleform.css'; ?>" rel="stylesheet" type="text/css">
         <!--[if lt IE 9]>
@@ -23,12 +25,7 @@
     <body style="height:100%;">
         <div id="bloc_page2">
             <header>
-                <div id="titre_principal">
-                    
-                    <h1>Street Workout World</h1>
-
-                </div>
-                <nav class="navbar navbar-inverse navbar-fixed-top">
+                <nav class="navbar navbar-inverse">
                     <div class="container-fluid">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="home">Street Workout World</a></li>
@@ -49,12 +46,20 @@
                             <li><a href="#"></a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="admin">Panel d'administration</a></li>
-                            <li><a href="inscription"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                            <li><a href="connexion"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                            <li><button class="btn btn-danger navbar-btn" onclick="location.href='deconnexion'">Logout</button></li>
+
+                            <?php if (!isset($_COOKIE['user'])) { ?>
+                                <li><a href="inscription"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                                <li><a href="connexion"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+
+                            <?php }
+                            if (isset($_COOKIE['user'])) {
+                                ?>
+                                <li><a href="admin">Panel d'administration</a></li>
+                                <li><button class="btn btn-danger navbar-btn" onclick="location.href = 'deconnexion'">Logout</button></li>
+<?php } ?>
                         </ul>
                     </div>
                 </nav>
-
+               
+          
             </header>

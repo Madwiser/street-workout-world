@@ -46,11 +46,7 @@ class ControleurConnexion {
             require_once chemins::CONTROLEURS . "controleur_utilisateur.class.php";
             $Controleurutilisateur = new Controleurutilisateur();
             if($Controleurutilisateur->verifutilisateur(htmlspecialchars($_POST['login']),htmlspecialchars($_POST['passe']))){
-                //var_dump(self::isConnected());
-                //require_once chemins::CONTROLEURS . 'controleur_accueil.class.php';
-                //$ControleurAccueil = new ControleurAccueil();
-                //$ControleurAccueil->afficherarticleAccueil();
-                 header("Location: /index.php");
+                 header("Location: /street-workout-world/home");
             }   
         } else {
             require_once chemins::VUES_ADMIN . "v_connexion.inc.php";
@@ -61,6 +57,7 @@ class ControleurConnexion {
         setcookie('user', '', time() - 3600, '/');
         // Suppression de la valeur du cookie en mémoire dans $_COOKIE
         unset($_COOKIE['user']);
+        header("Location: /street-workout-world/home");
     }
 
 }
