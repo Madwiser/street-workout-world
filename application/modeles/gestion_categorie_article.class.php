@@ -5,6 +5,24 @@ class Gestioncategoriearticle extends GestionBDD {
     public static function getLescategoriearticle() {
         return self::getLesTuples("categoriearticle");
     }
+    
+    public static function getidCategoriearticleByLibelle($nomCategorie) {
+        self::seConnecter();
+        try {
+
+
+            self::$request = "SELECT idcategorie as id FROM categoriearticle WHERE libellecategorie= :libelle";
+            self::$pdoStResults = self::$pdoCnxBase->prepare(self::$request);
+            self::$pdoStResults->bindValue('libelle', $nomCategorie);
+            self::$pdoStResults->execute();
+            self::$result = self::$pdoStResults->fetch();
+            self::$pdoStResults->closeCursor();
+            return self::$result->id;
+        } catch (Exception $ex) {
+            echo 'Erreur : ' . $ex->getMessage();
+        }
+    }
+    
 
     public static function getLacategoriearticleById($idCategorie) {
         self::seConnecter();

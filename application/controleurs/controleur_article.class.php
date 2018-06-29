@@ -19,23 +19,35 @@ class ControleurArticle {
     }
 
     public function afficherArticles() {
- 
+
         VariablesGlobales::$lesarticles = GestionArticle::getLesarticles();
         require_once chemins::VUES . 'v_articles.inc.php';
     }
-    
-     public function afficherArticlesCategorie() {
-   
-        VariablesGlobales::$lesarticles = GestionArticle::getLesarticlesBycategorie($idcategorie);
-        require_once chemins::VUES . 'v_articles.inc.php';
+
+    public function afficherArticlesCategorie() {
+        if (!empty(VariablesGlobales::$libelleCategorie)) {
+            $idcategorie = Gestioncategoriearticle::getidCategoriearticleByLibelle(VariablesGlobales::$libelleCategorie);
+            if (!empty($idcategorie)) {
+                VariablesGlobales::$lesarticles = GestionArticle::getLesarticlesBycategorie($idcategorie);
+                require_once chemins::VUES . 'v_articles.inc.php';
+            }
+            else{
+                die("aucune categorie ne correspond...");
+            }
+        }
     }
 
-     public function afficherArticle() {
-     
-        VariablesGlobales::$unarticle = GestionArticle::getarticleByID($idarticle);
-        require_once chemins::VUES . 'v_article.inc.php';
+    public function afficherArticle() {
+        if (!empty(VariablesGlobales::$id)) {
+            VariablesGlobales::$unarticle = GestionArticle::getarticleByID(VariablesGlobales::$id);
+            if (!empty(VariablesGlobales::$unarticle)) {
+                require_once chemins::VUES . 'v_article.inc.php';
+            } else {
+                die("aucun article ne correspond...");
+            }
+        }
     }
-    
+
     public function gestionArticle() {
         VariablesGlobales::$lesarticles = GestionArticle::getLesarticles();
         require chemins::VUES_ADMIN . "v_gestion_articles.inc.php";
@@ -77,8 +89,8 @@ class ControleurArticle {
                 if (!empty(VariablesGlobales::$unarticle)) {
                     VariablesGlobales::$lescategories = Gestioncategoriearticle::getLescategoriearticle();
                     require_once chemins::VUES_ADMIN . "v_edition_article.inc.php";
-                }else{
-                die("aucun article ne correspond...");
+                } else {
+                    die("aucun article ne correspond...");
                 }
             }
         } else {

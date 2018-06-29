@@ -68,7 +68,14 @@ if (empty($elements[1]) || $elements[1] == 'index.php' || $elements[1] == 'home'
              $action = 'afficherArticles';
             }
             else{
-                
+              if(preg_match("#[0-9]+#" ,$elements[2])){
+                  VariablesGlobales::$id = $elements[2];
+                  $action = 'afficherArticle';
+              }
+              else{
+                  VariablesGlobales::$libelleCategorie = $elements[2];
+                  $action = 'afficherArticlesCategorie';
+              }
             }
             break;
 

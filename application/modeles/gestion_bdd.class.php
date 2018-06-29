@@ -37,7 +37,17 @@ class GestionBDD {
     public static function seConnecter() {
         if (!isset(self::$pdoCnxBase)) {
             try {
-                self::$pdoCnxBase = new PDO('pgsql:host=' . PgSqlConfig::NOM_SERVEUR . ';port=' . PgSqlConfig::PORT . ';dbname=' . PgSqlConfig::NOM_BASE . ';user=' . PgSqlConfig::NOM_utilisateur . ';password=' . PgSqlConfig::MOT_DE_PASSE);
+                $db = parse_url(getenv("DATABASE_URL"));
+
+self::$pdoCnxBase = new PDO("pgsql:" . sprintf(
+    "host=%s;port=%s;user=%s;password=%s;dbname=%s",
+    $db["host"],
+    $db["port"],
+    $db["user"],
+    $db["pass"],
+    $db["name"]
+));
+                //self::$pdoCnxBase = new PDO('pgsql:host=' . PgSqlConfig::NOM_SERVEUR . ';port=' . PgSqlConfig::PORT . ';dbname=' . PgSqlConfig::NOM_BASE . ';user=' . PgSqlConfig::NOM_utilisateur . ';password=' . PgSqlConfig::MOT_DE_PASSE);
                 self::$pdoCnxBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 self::$pdoCnxBase->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
                 //self::$pdoCnxBase->query("SET CHARACTER SET utf8");
